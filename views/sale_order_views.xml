@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- sale_start_end_dates hides the date fields of an order line when its
+         product does not require dates: keep them visible. They stay required
+         only when the product requires them. -->
+    <record id="view_order_form_inherit_dates_always_visible" model="ir.ui.view">
+        <field name="name">sale.order.form.dates.always.visible</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_start_end_dates.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/list/field[@name='start_date']" position="attributes">
+                <attribute name="invisible"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/list/field[@name='end_date']" position="attributes">
+                <attribute name="invisible"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/list/field[@name='number_of_days']" position="attributes">
+                <attribute name="invisible"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_order_line_view_form_readonly_inherit_dates_always_visible" model="ir.ui.view">
+        <field name="name">sale.order.line.form.readonly.dates.always.visible</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="sale_start_end_dates.sale_order_line_view_form_readonly"/>
+        <field name="arch" type="xml">
+            <field name="start_date" position="attributes">
+                <attribute name="invisible"/>
+            </field>
+            <field name="end_date" position="attributes">
+                <attribute name="invisible"/>
+            </field>
+            <field name="number_of_days" position="attributes">
+                <attribute name="invisible"/>
+            </field>
+        </field>
+    </record>
+</odoo>
